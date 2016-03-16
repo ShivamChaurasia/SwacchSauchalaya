@@ -1,0 +1,13 @@
+<template name="mapPage">
+
+  {{>nav title="Home" black=true}}
+
+  {{#if mapPage}}
+    <div class="map-container">
+      {{> countMap name="showReceivers"}}
+    </div>
+  {{else}}
+    {{> pie }}
+  {{/if}}
+</template>
+
