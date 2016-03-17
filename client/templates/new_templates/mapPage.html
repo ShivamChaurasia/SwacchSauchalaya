@@ -1,13 +1,13 @@
 <template name="mapPage">
 
-  {{>nav title="Home" black=true}}
 
   {{#if mapPage}}
+  	{{>nav title="Home" black=true}}
     <div class="map-container">
       {{> countMap }}
     </div>
   {{else}}
-    {{> pie }}
+    {{> washroomPage }}
   {{/if}}
 </template>
 

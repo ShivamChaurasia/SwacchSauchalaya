@@ -36,9 +36,6 @@ if (Meteor.isClient) {
                     var index = e.target.__parent._markers.indexOf(e.target),
                         obj = addressPoints[index];
 
-                    console.log(obj.managerName);
-                    console.log("index",index);
-
                   var temp = 
                     "<span class='item-activity'><span class='attribution'>"
                     +"<span class='avatar'>"
@@ -62,32 +59,22 @@ if (Meteor.isClient) {
                     }).show();
                 });
 
-                // marker.on('mousemove', function(e) {
-                //     $('#marker-tooltip').css({
-                //                 'left': $(e.originalEvent.target).offset().left-100,
-                //                 'top': $(e.originalEvent.target).offset().top +30,
-                //                 'pointer-events' : 'none'
-                //             }).show();
-                // });
-
                 marker.on('mouseout', function(e) {
-                 $('#marker-tooltip').hide();
+                    $('#marker-tooltip').hide();
                 });
 
-                marker.on('click', function(event) {
+                marker.on('click', function(e) {
                     var index = e.target.__parent._markers.indexOf(e.target),
                         obj = addressPoints[index];
                     
-                    console.log(obj.managerName);
-                    Router.go("pie");
-                  // $('#marker-tooltip').hide();
-                  // Session.set("mapPage", false);
+                    Session.set("mapPage", false);
+                    Session.set("SELECTEDLOO", obj.tID);
+
+                    $('#marker-tooltip').hide();
+                    // Router.go("pie");
                 });
                 // var title = "Clean";
                 // marker.bindPopup(title);
-                // marker.on('mouseover', function(e) {
-                //     e.layer.openPopup();
-                // });
                 markers.addLayer(marker);
             }
             map.addLayer(markers);
