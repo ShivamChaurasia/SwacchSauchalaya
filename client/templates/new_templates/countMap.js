@@ -8,13 +8,13 @@ if (Meteor.isClient) {
     this.autorun(function () {
       if (Mapbox.loaded()) {
 
+        Loos.find().observe({
+          added: function (document) {
+
             L.mapbox.accessToken = 'pk.eyJ1IjoicGF1bG9ib3JnZXMiLCJhIjoicFQ1Sll5ZyJ9.alPGD574u3NOBi2iiIh--g';
 
             var map = L.mapbox.map('map', 'mapbox.streets',{zoomControl:false}).setView([Session.get('LAT'),Session.get('LON')], 11);
             new L.Control.Zoom({ position: 'topright' }).addTo(map);
-
-        Loos.find().observe({
-          added: function (document) {
 
             var markers = new L.MarkerClusterGroup();
             
@@ -33,29 +33,33 @@ if (Meteor.isClient) {
                 });
 
                 marker.on('mouseover', function(e) {
+                    var index = e.target.__parent._markers.indexOf(e.target),
+                        obj = addressPoints[index];
+
+                    console.log(obj.managerName);
+                    console.log("index",index);
+
                   var temp = 
                     "<span class='item-activity'><span class='attribution'>"
                     +"<span class='avatar'>"
-                    +"<img src="+a.userAvatar+" class='image-avatar'>"
+                    +"<img src="+obj.userImage+" class='image-avatar'>"
                     +"</span>"
                     +"<span class='meta'>"
-                    +"<span class='recipe'>"+a.userName+""
+                    +"<span class='recipe'>"+obj.tID+" managed by "+obj.managerName
                     +"</span></span></span></span>";
 
                     // var temp2 =   "<div class='rating_wrapper'><div class='rating'><input type='radio' id='star5' name='rating' value='5' /><label for='star5' title='Rocks!'>5 stars</label><input type='radio' id='star4' name='rating' value='4' checked/><label for='star4' title='Pretty good'>4 stars</label><input type='radio' id='star3' name='rating' value='3' /><label for='star3' title='Meh'>3 stars</label><input type='radio' id='star2' name='rating' value='2' /><label for='star2' title='Kinda bad'>2 stars</label><input type='radio' id='star1' name='rating' value='1' /><label for='star1' title='Sucks big time'>1 star</label></div></div>";
-
                     // temp = temp +temp2;
 
                     var offset = $(e.originalEvent.target).offset();
-                    var posY = offset.top - $(window).scrollTop() -$('#marker-tooltip').height() -50;
-                    var posX = offset.left - $(window).scrollLeft()-($('#marker-tooltip').width()); 
+                    var posY = offset.top - $(window).scrollTop() -$('#marker-tooltip').height() -150 + 'px';
+                    var posX = offset.left - $(window).scrollLeft()-($('#marker-tooltip').width()) -200+ 'px'; 
 
                     $('#marker-tooltip').html(temp).css({
-                                'left': posX,
-                                'top': posY,
-                                'pointer-events' : 'none'
-                            }).show();
-
+                        'left': posX,
+                        'top': posY,
+                        'pointer-events' : 'none'
+                    }).show();
                 });
 
                 // marker.on('mousemove', function(e) {
@@ -71,12 +75,19 @@ if (Meteor.isClient) {
                 });
 
                 marker.on('click', function(event) {
-                  Session.set("mapPage", false);
+                    var index = e.target.__parent._markers.indexOf(e.target),
+                        obj = addressPoints[index];
+                    
+                    console.log(obj.managerName);
+                    Router.go("pie");
                   // $('#marker-tooltip').hide();
-                  // Router.go("pie");
+                  // Session.set("mapPage", false);
                 });
                 // var title = "Clean";
                 // marker.bindPopup(title);
+                // marker.on('mouseover', function(e) {
+                //     e.layer.openPopup();
+                // });
                 markers.addLayer(marker);
             }
             map.addLayer(markers);

@@ -67,3 +67,28 @@
   .map-container #footer .fourteen.wide.column{
   	color: #fff;
   }
+  
+  #marker-tooltip {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        .item-activity{
+          width: 215px !important;
+        }
+  }
+
+
+  #marker-tooltip:after {
+      content:'';
+      position: absolute;
+      top: 80%;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: 0;
+      height: 0;
+      border-top: solid 7px #fff;
+      border-left: solid 7px transparent;
+      border-right: solid 7px transparent;
+  }
