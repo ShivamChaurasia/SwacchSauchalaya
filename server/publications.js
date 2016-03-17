@@ -6,6 +6,10 @@ Meteor.publish('loos', function() {
   return Loos.find();
 });
 
+Meteor.publish('requests', function() {
+  return Requests.find();
+});
+
 // Meteor.publish('news', function() {
 //   return News.find({}, {sort: {date: -1}, limit: 1});
 // });

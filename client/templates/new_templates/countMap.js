@@ -8,13 +8,13 @@ if (Meteor.isClient) {
     this.autorun(function () {
       if (Mapbox.loaded()) {
 
-        Loos.find().observe({
-          added: function (document) {
-
             L.mapbox.accessToken = 'pk.eyJ1IjoicGF1bG9ib3JnZXMiLCJhIjoicFQ1Sll5ZyJ9.alPGD574u3NOBi2iiIh--g';
 
             var map = L.mapbox.map('map', 'mapbox.streets',{zoomControl:false}).setView([Session.get('LAT'),Session.get('LON')], 11);
             new L.Control.Zoom({ position: 'topright' }).addTo(map);
+
+        Loos.find().observe({
+          added: function (document) {
 
             var markers = new L.MarkerClusterGroup();
             
@@ -90,8 +90,10 @@ if (Meteor.isClient) {
       function markerIcon(obj){
         if (obj.rating ==="1") {
             return "polling-place";
-        } 
+        } else if (false) {
             return "cross";
+        }
+            return "toilets";
       }
     });
   });

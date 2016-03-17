@@ -1,0 +1,16 @@
+<template name="washroomPage">
+	<div class="page whats-cooking">
+    	{{>nav title="Washrooms"}}
+	    <div class="content-scrollable">
+	      	<div class="list-activities" style="margin-top:50px">
+			    {{#each requests}}
+			          <div>{{this.subWashroomId}}</div>
+			          <div>{{this.status}}</div>
+			          <div>{{this.reqRaiseTime}}</div>
+			          <div>{{this.type}}</div>
+			    {{/each}}
+	      	</div>
+	    </div>
+  	</div>
+</template>
+
