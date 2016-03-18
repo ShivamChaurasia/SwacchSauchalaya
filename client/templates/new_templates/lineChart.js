@@ -50,28 +50,46 @@ Template.pie.rendered = function() {
 
   //Line chart
 
-var data = [
+var data = [ {dataA : [
               {"time" : "Yesterday", "value" : 20},
               {"time" : "Today", "value" : 30},
               {"time" : "Tomorrow", "value" : 10},
-            ];
-
-var data1 = [
-              {"time" : "Yesterday", "value" : 40},
+             ]},
+            {dataB : [ {"time" : "Yesterday", "value" : 40},
               {"time" : "Today", "value" : 20},
-              {"time" : "Tomorrow", "value" : 20},
-            ];
+              {"time" : "Tomorrow", "value" : 20},]}
+            ]
+
+
+var x_domainKeys = _.pluck(data[0].dataA, "time");
+var valueArr = []
+data.map(function(obj){
+                  _.values(obj)[0].map(function(d){
+                      valueArr.push(d.value);
+                  })
+              });
+// var dataA = [
+//               {"time" : "Yesterday", "value" : 20},
+//               {"time" : "Today", "value" : 30},
+//               {"time" : "Tomorrow", "value" : 10},
+//             ];
+
+// var dataB = [
+//               {"time" : "Yesterday", "value" : 40},
+//               {"time" : "Today", "value" : 20},
+//               {"time" : "Tomorrow", "value" : 20},
+//             ];
+
+console.log("yeah", valueArr);
 var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = $("#line_chart_container").width() - margin.left - margin.right,
     height = $("#line_chart_container").height() - margin.top - margin.bottom;
 
   var xScale = d3.scale.ordinal()
-              .domain(["Yesterday", "Today", "Tomorrow"])
+              .domain(x_domainKeys)
               .rangeRoundBands([ 0, width],0.6, 0.2);
 
-  var max_y = d3.max(data, function(d) {
-                  return d.value;
-              });
+  var max_y = d3.max(valueArr);
 
   var yScale = d3.scale.linear()
               .domain([ 0, max_y])
@@ -117,13 +135,25 @@ var svg = d3.select("#line_chart_container").append("svg")
              .x(function(d){ console.log(xScale(d.time)); return (21.5 + xScale(d.time));})
              .y(function(d){ return yScale(d.value);});
 
-  svg.append('path')
-        .attr('d',dataLine(data))
-        .attr('class','line');
+  var dataKeys = [];
 
-  svg.append('path')
-        .attr('d',dataLine(data1))
+  data.map(function(obj, i){
+    var currentData = data[i][_.keys(obj)];
+        console.log("currentData", currentData);
+       dataLine(currentData);
+// dataKeys.push(_.keys(obj));
+    svg.append('path')
+        .attr('d', dataLine(currentData) )
         .attr('class','line');
+  });
+  // console.log("dataKeys", dataKeys);
+  // svg.append('path')
+  //       .attr('d',dataLine(data[0].dataA))
+  //       .attr('class','line');
+
+  // svg.append('path')
+  //       .attr('d',dataLine(data[1].dataB))
+  //       .attr('class','line');
 
 
 // var formatDate = d3.time.format("%d-%b-%y");

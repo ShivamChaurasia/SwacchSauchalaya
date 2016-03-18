@@ -13,7 +13,8 @@ if (Meteor.isClient) {
 
             L.mapbox.accessToken = 'pk.eyJ1IjoicGF1bG9ib3JnZXMiLCJhIjoicFQ1Sll5ZyJ9.alPGD574u3NOBi2iiIh--g';
 
-            var map = L.mapbox.map('map', 'mapbox.streets',{zoomControl:false}).setView([Session.get('LAT'),Session.get('LON')], 11);
+            // var map = L.mapbox.map('map', 'mapbox.streets',{zoomControl:false}).setView([Session.get('LAT'),Session.get('LON')], 14);
+            var map = L.mapbox.map('map', 'mapbox.streets',{zoomControl:false}).setView([28.6149939,77.1978630], 14);
             new L.Control.Zoom({ position: 'topright' }).addTo(map);
 
             var markers = new L.MarkerClusterGroup();
