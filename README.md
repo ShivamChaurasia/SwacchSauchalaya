@@ -8,3 +8,8 @@ Local Market is an open source app powered by Meteor and made by [Percolate Stud
   - Cordova integration to use device phone and GPS
   - Mobile UI & UX
   
+ifconfig | grep inet
+
+export ROOT_URL=http://192.168.2.2:3000
+
+export ROOT_URL=http://localhost:3000
