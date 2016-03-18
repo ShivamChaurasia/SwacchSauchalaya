@@ -1,13 +1,25 @@
 <template name="washroomPage">
-	<div class="page whats-cooking">
+	<div class="page">
     	{{>nav title="Washrooms"}}
 	    <div class="content-scrollable">
-	      	<div class="list-activities" style="margin-top:50px">
-			    {{#each requests}}
-			          <div>{{this.subWashroomId}}</div>
-			          <div>{{this.status}}</div>
-			          <div>{{this.reqRaiseTime}}</div>
-			          <div>{{this.type}}</div>
+	      	<div style="margin-top:50px">
+	      		<div class = "mainWRName">{{mainWRName}}</div>
+			    {{#each selectedLoo}}
+			    	<div class = "washRoomDetails">
+				          <div class = "detailRow subWRTitle">{{this.name}}</div>
+				           <div class = "detailRow">
+				          		<label class = "detailLabel left">Open Requests : </label>
+				          		<label class = "detailValue right">{{this.openRequests}}</label> 
+				          </div>
+				          <div class = "detailRow">
+				          		<label class = "detailLabel left">Cleaning Requests : </label>
+				          		<label class = "detailValue right">{{this.cleanRequests}}</label> 
+				          </div>
+				          <div class = "detailRow">
+				          		<label class = "detailLabel left">Maintenance Requests : </label>
+				          		<label class = "detailValue right">{{this.maintenanceRequests}}</label> 
+				          </div>
+			        </div>
 			    {{/each}}
 	      	</div>
 	    </div>
