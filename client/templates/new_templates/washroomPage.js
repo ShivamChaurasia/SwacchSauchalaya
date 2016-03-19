@@ -56,24 +56,27 @@ if (Meteor.isClient) {
       });
       initializing = false;
 
-        // Requests.find().observe({
-        //   added: function (document) {
-        //     if (Session.get('FROMSIMULATOR')) {
-        //       Template.appBody.addNotification({
-        //         action: 'Close',
-        //         title: 'Clean Request Raised',
-        //         callback: function() {
-        //            Router.go('feed');
-        //         }
-        //       });
-        //     }
-        //   },
-        //   changed: function (newDocument, oldDocument) {
-        //     // alert("changed");
-        //   },
-        //   removed: function (oldDocument) {
-        //     // alert("removed");
-        //   }
-        // });
+    var text = [{
+        "id": "openRequests",
+        "english": "Open Requests : ",
+        "hindi": " खुले अनुरोध : "
+        },{
+        "id": "cleanRequests",
+        "english": "Clean Requests : ",
+        "hindi": " सफाई हेतु अनुरोध : "
+        },{
+        "id": "maintenanceRequests",
+        "english": "Maintenance Requests : ",
+        "hindi": " रखरखाव हेतु अनुरोध : "
+        }];
+
+    var language = 'hindi';
+
+    _.map(text,function(obj){
+        var id = obj.id;
+        var text = obj[language];
+        $("#" + id).html(text);
+    });
+
   });
 }
