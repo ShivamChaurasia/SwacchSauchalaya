@@ -29,7 +29,36 @@ Template.washroomPage.helpers({
   },
   mainWRName : function(){
   	return Session.get('SELECTEDLOO');
-  }
+  },
+  totalVisits: function(){
+    var total = 0;
+    _.filter(Loos.find().fetch(), function(obj) {
+            return obj.tID === Session.get('SELECTEDLOO')
+    })[0].subWashrooms.map(function(value) {
+      total= total+value.personVisitedThisMonth
+    });
+    return total;
+  },
+  totalRequests: function(){
+    return _.filter(Requests.find().fetch(), function(obj) {
+            return obj.subWashroomId.split(' : ')[0] === Session.get('SELECTEDLOO')
+    }).length;
+  },
+  Rating: function(){
+    var total = 0;
+    _.filter(Loos.find().fetch(), function(obj) {
+            return obj.tID === Session.get('SELECTEDLOO')
+    })[0].subWashrooms.map(function(value) {
+      total= total+value.personVisitedThisMonth
+    });
+    if (total === 0) {
+      return 0;
+    } else {
+      return 1-(_.filter(Requests.find().fetch(), function(obj) {
+              return obj.subWashroomId.split(' : ')[0] === Session.get('SELECTEDLOO')
+      }).length)/total;
+    }
+  },
 });
 
 Template.washroomPage.events({
