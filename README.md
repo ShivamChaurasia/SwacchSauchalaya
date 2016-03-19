@@ -1,15 +1,9 @@
-Local Market
-============
+Hi, Welcome to SwacchSauchalaya. This is a cross platform webapp created using meteor js as frontend and mongo db as the database. We have used the metoer js boiler plate.
 
-Local Market is an open source app powered by Meteor and made by [Percolate Studio](http://percolatestudio.com). In this example app we explore intermediate techniques:
+Note : To run meteor on a differnt host, use
 
-  - Using a sample database to generate lists and items
-  - Integrating OAUTH with Meteor's accounts-ui package
-  - Cordova integration to use device phone and GPS
-  - Mobile UI & UX
-  
 ifconfig | grep inet
-
 export ROOT_URL=http://192.168.2.2:3000
 
-export ROOT_URL=http://localhost:3000
+
+Please run meteor on the home folder of the app to run the project.
