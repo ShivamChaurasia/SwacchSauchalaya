@@ -86,17 +86,29 @@ if (Meteor.isClient) {
       initializing = false;
 
     var text = [{
-        "id": "openRequests",
+        "id": "totalVisits",
+        "english": " No. of people visited during this Month : ",
+        "hindi": " इस महीने आने वालों की संख्या : "
+        },{
+        "id": "totalRequests",
+        "english": "No. of requests raised during this Month : ",
+        "hindi": " इस महीने आने वाली शिकायतों की संख्या : "
+        },{
+        "id": "Rating",
+        "english": "No. of requests raised during this Month : ",
+        "hindi": " शौचालय रेटिंग : "
+        },{
+        "id": "openRequests", 
         "english": "Open Requests : ",
-        "hindi": " खुले अनुरोध : "
+        "hindi": "  खुली शिकायत: "
         },{
         "id": "cleanRequests",
         "english": "Clean Requests : ",
-        "hindi": " सफाई हेतु अनुरोध : "
+        "hindi": " सफाई हेतु शिकायत  : "
         },{
         "id": "maintenanceRequests",
         "english": "Maintenance Requests : ",
-        "hindi": " रखरखाव हेतु अनुरोध : "
+        "hindi": " रखरखाव हेतु शिकायत : "
         }];
 
     var language = Session.get("LANGUAGENAME");
