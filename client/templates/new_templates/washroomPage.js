@@ -99,13 +99,14 @@ if (Meteor.isClient) {
         "hindi": " रखरखाव हेतु अनुरोध : "
         }];
 
-    var language = 'hindi';
+    var language = Session.get("LANGUAGENAME");
 
     _.map(text,function(obj){
         var id = obj.id;
         var text = obj[language];
-        $("#" + id).html(text);
+        _.map(document.querySelectorAll("#" + id),function(elem){
+          elem.innerText = text;
+        });
     });
-
   });
 }
