@@ -1,9 +1,7 @@
 App.info({
-  name: 'Local Market',
-  description: 'A recipe sharing app made in Meteor.',
-  author: 'Percolate Studio Team',
-  email: 'us@percolatestudio.com',
-  website: 'http://percolatestudio.com',
+  name: 'SwacchSauchalaya',
+  description: 'An app made in Meteor to monitor sanitation in Public Loos.',
+  author: 'SwacchSauchalaya Team',
   version: '0.0.1'
 });
 
