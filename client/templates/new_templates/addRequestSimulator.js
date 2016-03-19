@@ -11,7 +11,7 @@ Template.addRequestSimulator.helpers({
   		});
   	});
     return allWashrooms;
-  },
+  }
 });
 
 Template.addRequestSimulator.events({
@@ -48,6 +48,27 @@ Template.addRequestSimulator.events({
   	    Overlay.close();
   	    }
   	 });
-  	
+  },
+  'click #addingPerson': function(event, template){
+    console.log(event, template);
+    var selectedParentLoo = _.filter(Loos.find().fetch(),function(loo){
+      return loo.tID === $('[name=washRoomsAddPerson] option:selected').val().split(':')[0].trim();
+    });
+
+    var subWArray = selectedParentLoo[0].subWashrooms;
+
+    var selectedSub = _.filter(subWArray,function(loo){
+      return loo.id === $('[name=washRoomsAddPerson] option:selected').val();
+    });
+    selectedSub[0].personVisitedThisMonth = selectedSub[0].personVisitedThisMonth + 1;
+
+    console.log("after",subWArray);
+    Meteor.call('updateLoo',selectedParentLoo[0]._id, subWArray, function(error, result) {
+      if (error) {
+        alert(error.reason);
+      } else {
+        console.log("updated",result);
+       }
+    });
   }
 });

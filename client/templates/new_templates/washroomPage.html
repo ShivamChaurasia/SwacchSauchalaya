@@ -4,6 +4,20 @@
 	    <div class="content-scrollable">
 	      	<div style="margin-top:50px">
 	      		<div class = "mainWRName">{{mainWRName}}</div>
+	      		<div class = "washRoomDetailsMain">
+		      		<div class = "detailRow">
+		      				<label id="totalVisits" class = "detailLabel left">No. of people visited during this Month : </label>
+		      				<label class = "detailValue right">{{totalVisits}}</label> 
+		      		</div>
+		      		<div class = "detailRow">
+		      				<label id="totalRequests" class = "detailLabel left">No. of requests raised during this Month : </label>
+		      				<label class = "detailValue right">{{totalRequests}}</label> 
+		      		</div>
+		      		<div class = "detailRow">
+		      				<label id="Rating" class = "detailLabel left">Washroom Rating</label>
+		      				<label class = "detailValue right">{{Rating}}</label> 
+		      		</div>
+		      	</div>	
 			    {{#each selectedLoo}}
 			    	<div class = "washRoomDetails">
 				          <div class = "detailRow subWRTitle">{{this.name}}</div>
