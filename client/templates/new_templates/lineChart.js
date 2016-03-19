@@ -51,13 +51,16 @@ Template.pie.rendered = function() {
   //Line chart
 
 var data = [ {dataA : [
-              {"time" : "Yesterday", "value" : 20},
-              {"time" : "Today", "value" : 30},
-              {"time" : "Tomorrow", "value" : 10},
+              {"time" : "Week1", "value" : 20},
+              {"time" : "Week2", "value" : 30},
+              {"time" : "Week3", "value" : 10},
+              {"time" : "Week4", "value" : 10}
              ]},
-            {dataB : [ {"time" : "Yesterday", "value" : 40},
-              {"time" : "Today", "value" : 20},
-              {"time" : "Tomorrow", "value" : 20},]}
+            {dataB : [  {"time" : "Week1", "value" : 30},
+              {"time" : "Week2", "value" : 20},
+              {"time" : "Week3", "value" : 10},
+              {"time" : "Week4", "value" : 40}
+            ]}
             ]
 
 
@@ -80,10 +83,11 @@ data.map(function(obj){
 //               {"time" : "Tomorrow", "value" : 20},
 //             ];
 
-console.log("yeah", valueArr);
 var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = $("#line_chart_container").width() - margin.left - margin.right,
     height = $("#line_chart_container").height() - margin.top - margin.bottom;
+
+var color = d3.scale.category20();
 
   var xScale = d3.scale.ordinal()
               .domain(x_domainKeys)
@@ -93,28 +97,29 @@ var margin = {top: 20, right: 20, bottom: 30, left: 50},
 
   var yScale = d3.scale.linear()
               .domain([ 0, max_y])
-              .range([ height, 0 ]);
+              .range([ height, 0 ])
+
 
 
   var xAxis = d3.svg.axis()
-            .scale(xScale)
-            .ticks(12)
-            .orient("bottom")
-            // .tickPadding(10)
-            .tickSize(0);
+              .scale(xScale)
+              .ticks(12)
+              .orient("bottom")
+              // .tickPadding(10)
+              .tickSize(0);
 
   var yAxis = d3.svg.axis()
               .scale(yScale)
               .orient("left")
-              .ticks(5)
+              .tickValues(function(){return [0, max_y/4, max_y/2, max_y*0.75, max_y]})
               // .tickPadding(5)
-              .tickSize(0);
+              .tickSize(-width);
 
 var svg = d3.select("#line_chart_container").append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
-          .append("g")
-          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
  svg.append("g")
       .attr("class", "x axis")
@@ -132,20 +137,33 @@ var svg = d3.select("#line_chart_container").append("svg")
       .text("Requests");
 
   var dataLine=d3.svg.line()
-             .x(function(d){ console.log(xScale(d.time)); return (21.5 + xScale(d.time));})
-             .y(function(d){ return yScale(d.value);});
+               .x(function(d){ console.log(xScale(d.time)); return (17.5 + xScale(d.time));})
+               .y(function(d){ return yScale(d.value);});
 
   var dataKeys = [];
 
   data.map(function(obj, i){
     var currentData = data[i][_.keys(obj)];
-        console.log("currentData", currentData);
-       dataLine(currentData);
-// dataKeys.push(_.keys(obj));
     svg.append('path')
         .attr('d', dataLine(currentData) )
-        .attr('class','line');
+        .attr('class','line')
+        .attr("data-legend",function(d) {return _.keys(obj)[0]})
+        .style("stroke", function(d, index) { return color(i); });
   });
+
+  svg.append("line")
+     .attr("x1", 128 + xScale(x_domainKeys[2]))
+     .attr("y1", height)
+     .attr("x2", 128 + xScale(x_domainKeys[2]))
+     .attr("y2", 0);
+
+       legend = svg.append("g")
+    .attr("class","legend")
+    .attr("transform","translate(50,30)")
+    .style("font-size","12px")
+    .call(d3.legend)
+
+
   // console.log("dataKeys", dataKeys);
   // svg.append('path')
   //       .attr('d',dataLine(data[0].dataA))
