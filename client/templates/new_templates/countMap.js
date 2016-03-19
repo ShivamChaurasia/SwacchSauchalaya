@@ -50,8 +50,8 @@ if (Meteor.isClient) {
                     // temp = temp +temp2;
 
                     var offset = $(e.originalEvent.target).offset();
-                    var posY = offset.top - $(window).scrollTop() -$('#marker-tooltip').height() -150 + 'px';
-                    var posX = offset.left - $(window).scrollLeft()-($('#marker-tooltip').width()) -200+ 'px'; 
+                    var posY = offset.top - $(window).scrollTop() -$('#marker-tooltip').height() + 30 + 'px';
+                    var posX = offset.left - $(window).scrollLeft()-($('#marker-tooltip').width()) -220+ 'px'; 
 
                     $('#marker-tooltip').html(temp).css({
                         'left': posX,
