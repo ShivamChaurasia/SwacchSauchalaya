@@ -91,23 +91,23 @@ if (Meteor.isClient) {
         "hindi": " इस महीने आने वालों की संख्या : "
         },{
         "id": "totalRequests",
-        "english": "No. of requests raised during this Month : ",
+        "english": "No. of complaints raised during this Month : ",
         "hindi": " इस महीने आने वाली शिकायतों की संख्या : "
         },{
         "id": "Rating",
-        "english": "No. of requests raised during this Month : ",
+        "english": "Toilet Rating : ",
         "hindi": " शौचालय रेटिंग : "
         },{
         "id": "openRequests", 
-        "english": "Open Requests : ",
+        "english": "Open Complaints : ",
         "hindi": "  खुली शिकायत: "
         },{
         "id": "cleanRequests",
-        "english": "Clean Requests : ",
+        "english": "Clean Complaints : ",
         "hindi": " सफाई हेतु शिकायत  : "
         },{
         "id": "maintenanceRequests",
-        "english": "Maintenance Requests : ",
+        "english": "Maintenance Complaints : ",
         "hindi": " रखरखाव हेतु शिकायत : "
         }];
 
