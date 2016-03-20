@@ -62,7 +62,9 @@ Template.washroomPage.helpers({
 });
 
 Template.washroomPage.events({
-  
+  'click a':function(e,target){
+    console.log(e,target);
+  }
 });
 
 
